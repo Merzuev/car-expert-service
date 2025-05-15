@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h1>Добро пожаловать в {{ company_name }}</h1>
+        <p>Профессиональный ремонт и обслуживание автомобилей</p>
+    </div>
+</section>
+
+<section class="services">
+    <div class="container">
+        <h2>Свяжитесь с нами</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Имя:</label><br>
+    <input type="text" name="name" required><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" required><br>
+
+    <label>Сообщение:</label><br>
+    <textarea name="message" rows="5" required></textarea><br>
+
+    <button type="submit">Отправить</button>
+</form>
+
+    </div>
+
+</section>
+{% endblock %}
