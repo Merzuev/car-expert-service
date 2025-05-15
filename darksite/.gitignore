@@ -1,0 +1,28 @@
+# Базы данных
+*.sqlite3
+
+# Конфигурационные файлы окружения
+.env
+*.log
+
+# Python Cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Миграции (опционально)
+**/migrations/*.pyc
+**/migrations/__pycache__/
