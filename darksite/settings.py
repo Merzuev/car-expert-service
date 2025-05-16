@@ -76,7 +76,7 @@ USE_TZ = True
 
 # --- Static files ---
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'main' / 'static' / 'main' ]
+STATICFILES_DIRS = [BASE_DIR / 'main' / 'static'  ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # Required for production collectstatic
 
 # --- Default primary key ---
