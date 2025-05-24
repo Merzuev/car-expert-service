@@ -30,14 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Функция открытия модального окна
-  function openModal(content) {
-    modalBody.innerHTML = content;
-    modal.style.display = 'block';
-  }
+  function openModal(serviceTitle, contentHtml) {
+  document.getElementById('modalTitle').textContent = serviceTitle;
+  document.getElementById('modal-body').innerHTML = contentHtml;
+  document.getElementById('modal').classList.remove('hidden');
 
   // Функция закрытия модального окна
-  function closeModal() {
-    modal.style.display = 'none';
+  function closeModal(id) {
+  document.getElementById(id).classList.add('hidden');
   }
 
   // Назначение обработчиков клика на карточки услуг
