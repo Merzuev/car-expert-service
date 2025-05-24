@@ -388,7 +388,7 @@ footer {
     grid-template-columns: 1fr;
   }
 }
-/* === МОДАЛЬНОЕ ОКНО === */
+/* === MODAL BASE === */
 .custom-modal {
   position: fixed;
   inset: 0;
@@ -404,31 +404,32 @@ footer {
   display: none;
 }
 
+/* === MODAL CONTENT === */
 .custom-modal-content {
-  background: linear-gradient(135deg, #101f39, #0b1529);
-  color: #0d111c; 
+  background: radial-gradient(circle at top left, #0a0f1c, #101f39);
+  color: #f1f1f1;
   padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 0 20px rgba(0, 140, 255, 0.3), 0 0 30px rgba(0, 140, 255, 0.2);
+  border-radius: 16px;
   max-width: 700px;
   width: 90%;
   max-height: 80vh;
   overflow-y: auto;
   position: relative;
-  border: 1px solid rgba(0, 140, 255, 0.4);
-  animation: modalFadeIn 0.4s ease-out;
+  border: 1px solid rgba(0, 170, 255, 0.3);
+  box-shadow: 0 0 16px rgba(0, 170, 255, 0.2);
+  animation: modalFadeIn 0.35s ease-out;
 }
 
-/* === КНОПКА ЗАКРЫТИЯ === */
+/* === CLOSE BUTTON === */
 .modal-close,
 .custom-close-btn {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  font-size: 1.8rem;
+  font-size: 1.75rem;
   background: none;
   border: none;
-  color: #8fa7c4;
+  color: #89a4c7;
   cursor: pointer;
   transition: color 0.3s ease;
 }
@@ -438,16 +439,16 @@ footer {
   color: #ff4d6d;
 }
 
-/* === ЗАГОЛОВОК === */
+/* === MODAL TITLE === */
 .modal-title {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   color: #00baff;
   text-shadow: 0 0 6px #00baff;
 }
 
-/* === ТАБЛИЦА ВНУТРИ МОДАЛКИ === */
+/* === MODAL TABLE === */
 .modal-table-container {
   overflow-x: auto;
 }
@@ -456,18 +457,18 @@ footer {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
-  color: #0d111c; 
+  color: #f1f1f1;
 }
 
 .modal-table th,
 .modal-table td {
-  padding: 0.75rem 1rem;
+  padding: 12px 16px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   text-align: left;
 }
 
 .modal-table th {
-  background-color: #1a2a4d;
+  background-color: #162338;
   color: #00cfff;
   font-weight: 600;
   text-shadow: 0 0 4px #00cfff;
@@ -478,7 +479,7 @@ footer {
   transition: background 0.2s ease;
 }
 
-/* === АНИМАЦИЯ === */
+/* === ANIMATION === */
 @keyframes modalFadeIn {
   from {
     opacity: 0;
@@ -489,3 +490,33 @@ footer {
     transform: scale(1);
   }
 }
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .custom-modal-content {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+  
+  .modal-title {
+    font-size: 1.25rem;
+  }
+
+  .modal-table th,
+  .modal-table td {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-modal-content {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .modal-title {
+    font-size: 1.1rem;
+  }
+}
+
