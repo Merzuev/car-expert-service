@@ -76,12 +76,17 @@
 
 
     <!-- Модальное окно -->
-<div id="serviceModal" class="custom-modal hidden">
-  <div class="modal-overlay" onclick="closeModal('serviceModal')"></div>
+<div id="modal" class="custom-modal hidden">
+  <div class="modal-overlay" onclick="closeModal('modal')"></div>
   <div class="custom-modal-content animate-fade-in">
-    ...
+    <button class="modal-close" onclick="closeModal('modal')">&times;</button>
+    <h5 class="modal-title" id="modalTitle">Titre du service</h5>
+    <div id="modal-body" class="modal-table-container">
+      <!-- Прайс загрузится сюда -->
+    </div>
   </div>
 </div>
+
   </section>
 
   <!-- À PROPOS -->
