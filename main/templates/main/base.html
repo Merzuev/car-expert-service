@@ -10,8 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
 </head>
-<body>
 
+<body>
+<script src="{% static 'main/js/script.js' %}"></script>
 <header class="top-nav">
   <div class="logo-title">
     <img src="{% static 'main/images/logo.png' %}" alt="Logo" class="nav-logo" />
@@ -47,13 +48,42 @@
   <section class="services-section" id="services">
     <h2 data-aos="fade-up">Nos Services</h2>
     <div class="services-grid">
-      <div class="service-card" data-aos="zoom-in"><img src="{% static 'main/images/dvs.png' %}" /><p>Réparation moteur</p></div>
-      <div class="service-card" data-aos="zoom-in" data-aos-delay="100"><img src="{% static 'main/images/xod.png' %}" /><p>Réparation du châssis</p></div>
-      <div class="service-card" data-aos="zoom-in" data-aos-delay="200"><img src="{% static 'main/images/oil.png' %}" /><p>Vidange d'huile</p></div>
-      <div class="service-card" data-aos="zoom-in" data-aos-delay="300"><img src="{% static 'main/images/prod.png' %}" /><p>Vente de voitures</p></div>
-      <div class="service-card" data-aos="zoom-in" data-aos-delay="400"><img src="{% static 'main/images/torm.png' %}" /><p>Réparation des freins</p></div>
-      <div class="service-card" data-aos="zoom-in" data-aos-delay="500"><img src="{% static 'main/images/diog.png' %}" /><p>Diagnostic auto</p></div>
+  <div class="service-card" data-service="repair" data-aos="zoom-in">
+    <img src="{% static 'main/images/dvs.png' %}" />
+    <p>Réparation moteur</p>
+  </div>
+  <div class="service-card" data-service="repair" data-aos="zoom-in" data-aos-delay="100">
+    <img src="{% static 'main/images/xod.png' %}" />
+    <p>Réparation du châssis</p>
+  </div>
+  <div class="service-card" data-service="maintenance" data-aos="zoom-in" data-aos-delay="200">
+    <img src="{% static 'main/images/oil.png' %}" />
+    <p>Vidange d'huile</p>
+  </div>
+  <div class="service-card" data-service="none" data-aos="zoom-in" data-aos-delay="300">
+    <img src="{% static 'main/images/prod.png' %}" />
+    <p>Vente de voitures</p>
+  </div>
+  <div class="service-card" data-service="repair" data-aos="zoom-in" data-aos-delay="400">
+    <img src="{% static 'main/images/torm.png' %}" />
+    <p>Réparation des freins</p>
+  </div>
+  <div class="service-card" data-service="diagnostics" data-aos="zoom-in" data-aos-delay="500">
+    <img src="{% static 'main/images/diog.png' %}" />
+    <p>Diagnostic auto</p>
+  </div>
+</div>
+
+
+    <!-- Модальное окно -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <div id="modal-body">
+      <!-- Здесь будет отображаться прайс -->
     </div>
+  </div>
+</div>
   </section>
 
   <!-- À PROPOS -->
