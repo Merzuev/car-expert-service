@@ -29,12 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     `
   };
 
-  // Функция открытия модального окна
   function openModal(serviceTitle, contentHtml) {
   document.getElementById('modalTitle').textContent = serviceTitle;
   document.getElementById('modal-body').innerHTML = contentHtml;
   document.getElementById('modal').classList.remove('hidden');
-
+  }
   // Функция закрытия модального окна
   function closeModal(id) {
   document.getElementById(id).classList.add('hidden');
