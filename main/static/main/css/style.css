@@ -400,9 +400,14 @@ footer {
   transition: opacity 0.3s ease;
 }
 
+<<<<<<< HEAD
 .custom-modal.hidden {
+=======
+.hidden {
+>>>>>>> cc69404 (Fix structure and Procfile for Render deployment)
   display: none !important;
 }
+
 
 /* === MODAL CONTENT === */
 .custom-modal-content {
@@ -518,8 +523,4 @@ footer {
   .modal-title {
     font-size: 1.1rem;
   }
-}
-
-.hidden {
-  display: none !important;
 }
