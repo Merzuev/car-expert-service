@@ -400,10 +400,6 @@ footer {
   transition: opacity 0.3s ease;
 }
 
-.custom-modal.hidden {
-  display: none !important;
-}
-
 /* === MODAL CONTENT === */
 .custom-modal-content {
   background: radial-gradient(circle at top left, #0a0f1c, #101f39);

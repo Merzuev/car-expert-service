@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('modal');
+  if (modal) { // Ensure modal exists before trying to set its style
+    modal.style.display = 'none';
+  }
   const modalBody = document.getElementById('modal-body');
   const closeButton = document.querySelector('.modal-close');
   const serviceCards = document.querySelectorAll('.service-card');
@@ -32,11 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function openModal(serviceTitle, contentHtml) {
   document.getElementById('modalTitle').textContent = serviceTitle;
   document.getElementById('modal-body').innerHTML = contentHtml;
-  document.getElementById('modal').classList.remove('hidden');
+  document.getElementById('modal').style.display = 'flex';
   }
   // Функция закрытия модального окна
   function closeModal(id) {
-  document.getElementById(id).classList.add('hidden');
+  const elementToClose = document.getElementById(id);
+  if (elementToClose) {
+    elementToClose.style.display = 'none';
+  }
   }
 
   // Назначение обработчиков клика на карточки услуг
