@@ -48,32 +48,58 @@
   <section class="services-section" id="services">
   <h2 data-aos="fade-up">Nos Services</h2>
   <div class="services-grid">
-    <div class="service-card" data-service="Réparation moteur" data-prices="Réparation moteur complet — 300€;Changement de pièces — 150€" data-aos="zoom-in">
-      <img src="{% static 'main/images/dvs.png' %}" />
-      <p>Réparation moteur</p>
+  
+    <div class="service-card"
+         data-service="Ремонт двигателя"
+         data-prices="Диагностика — 500₽;Ремонт блока — 3000₽"
+         data-aos="zoom-in" data-aos-delay="0">
+      <img src="{% static 'main/images/dvs.png' %}" alt="Ремонт двигателя">
+      <p>Ремонт двигателя</p>
     </div>
-    <div class="service-card" data-service="Réparation du châssis" data-prices="Réparation châssis — 400€;Remplacement pièces — 200€" data-aos="zoom-in" data-aos-delay="100">
-      <img src="{% static 'main/images/xod.png' %}" />
+
+    <div class="service-card"
+         data-service="Réparation du châssis"
+         data-prices="Réparation châssis — 400€;Remplacement pièces — 200€"
+         data-aos="zoom-in" data-aos-delay="100">
+      <img src="{% static 'main/images/xod.png' %}" alt="Réparation du châssis">
       <p>Réparation du châssis</p>
     </div>
-    <div class="service-card" data-service="Vidange d'huile" data-prices="Vidange standard — 50€;Vidange premium — 80€" data-aos="zoom-in" data-aos-delay="200">
-      <img src="{% static 'main/images/oil.png' %}" />
+
+    <div class="service-card"
+         data-service="Vidange d'huile"
+         data-prices="Vidange standard — 50€;Vidange premium — 80€"
+         data-aos="zoom-in" data-aos-delay="200">
+      <img src="{% static 'main/images/oil.png' %}" alt="Vidange d'huile">
       <p>Vidange d'huile</p>
     </div>
-    <div class="service-card" data-service="Vente de voitures" data-prices="Contactez-nous pour les prix" data-aos="zoom-in" data-aos-delay="300">
-      <img src="{% static 'main/images/prod.png' %}" />
+
+    <div class="service-card"
+         data-service="Vente de voitures"
+         data-prices="Contactez-nous pour les prix"
+         data-aos="zoom-in" data-aos-delay="300">
+      <img src="{% static 'main/images/prod.png' %}" alt="Vente de voitures">
       <p>Vente de voitures</p>
     </div>
-    <div class="service-card" data-service="Réparation des freins" data-prices="Réparation frein avant — 120€;Réparation frein arrière — 130€" data-aos="zoom-in" data-aos-delay="400">
-      <img src="{% static 'main/images/torm.png' %}" />
+
+    <div class="service-card"
+         data-service="Réparation des freins"
+         data-prices="Réparation frein avant — 120€;Réparation frein arrière — 130€"
+         data-aos="zoom-in" data-aos-delay="400">
+      <img src="{% static 'main/images/torm.png' %}" alt="Réparation des freins">
       <p>Réparation des freins</p>
     </div>
-    <div class="service-card" data-service="Diagnostic auto" data-prices="Diagnostic complet — 90€;Diagnostic électrique — 50€" data-aos="zoom-in" data-aos-delay="500">
-      <img src="{% static 'main/images/diog.png' %}" />
+
+    <div class="service-card"
+         data-service="Diagnostic auto"
+         data-prices="Diagnostic complet — 90€;Diagnostic électrique — 50€"
+         data-aos="zoom-in" data-aos-delay="500">
+      <img src="{% static 'main/images/diog.png' %}" alt="Diagnostic auto">
       <p>Diagnostic auto</p>
     </div>
+
   </div>
 </section>
+
 
 
   <!-- À PROPOS -->
@@ -148,51 +174,45 @@
     });
   });
 </script>
-<!-- Модальное окно -->
+<!-- МОДАЛЬНОЕ ОКНО -->
 <div id="priceModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <h2 id="modal-title">Прайс-лист</h2>
-    <div id="modal-body">
-      <!-- Контент будет подставляться через JS -->
-    </div>
+    <span class="close">&times;</span>
+    <h3>Прайс</h3>
+    <ul></ul>
   </div>
 </div>
 
-  <!-- Скрипт модального окна -->
-  <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const modal = document.getElementById('priceModal');
-    const closeBtn = modal.querySelector('.close-btn');
-    const modalTitle = modal.querySelector('#modal-title');
-    const modalBody = modal.querySelector('#modal-body');
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("priceModal");
+    const modalContent = modal.querySelector(".modal-content");
+    const closeModal = modal.querySelector(".close");
 
-    document.querySelectorAll('.service-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const title = card.dataset.service;
-        const prices = card.dataset.prices
-          .split(';')
-          .map(item => `<li>${item}</li>`)
-          .join('');
+    document.querySelectorAll(".service-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const title = card.getAttribute("data-service");
+        const prices = card.getAttribute("data-prices");
 
-        modalTitle.textContent = `Прайс: ${title}`;
-        modalBody.innerHTML = `<ul>${prices}</ul>`;
-        modal.classList.add('visible');
+        modalContent.querySelector("h3").textContent = `Прайс: ${title}`;
+        const priceList = prices.split(";").map(item => `<li>${item}</li>`).join("");
+        modalContent.querySelector("ul").innerHTML = priceList;
+
+        modal.classList.add("visible");
       });
     });
 
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('visible');
+    closeModal.addEventListener("click", () => {
+      modal.classList.remove("visible");
     });
 
-    window.addEventListener('click', (e) => {
+    modal.addEventListener("click", (e) => {
       if (e.target === modal) {
-        modal.classList.remove('visible');
+        modal.classList.remove("visible");
       }
     });
   });
 </script>
-
 
 </body>
 </html>
