@@ -46,34 +46,35 @@
 
   <!-- SERVICES -->
   <section class="services-section" id="services">
-    <h2 data-aos="fade-up">Nos Services</h2>
-    <div class="services-grid">
-      <div class="service-card" data-service="repair" data-aos="zoom-in">
-        <img src="{% static 'main/images/dvs.png' %}" />
-        <p>Réparation moteur</p>
-      </div>
-      <div class="service-card" data-service="repair" data-aos="zoom-in" data-aos-delay="100">
-        <img src="{% static 'main/images/xod.png' %}" />
-        <p>Réparation du châssis</p>
-      </div>
-      <div class="service-card" data-service="maintenance" data-aos="zoom-in" data-aos-delay="200">
-        <img src="{% static 'main/images/oil.png' %}" />
-        <p>Vidange d'huile</p>
-      </div>
-      <div class="service-card" data-service="none" data-aos="zoom-in" data-aos-delay="300">
-        <img src="{% static 'main/images/prod.png' %}" />
-        <p>Vente de voitures</p>
-      </div>
-      <div class="service-card" data-service="repair" data-aos="zoom-in" data-aos-delay="400">
-        <img src="{% static 'main/images/torm.png' %}" />
-        <p>Réparation des freins</p>
-      </div>
-      <div class="service-card" data-service="diagnostics" data-aos="zoom-in" data-aos-delay="500">
-        <img src="{% static 'main/images/diog.png' %}" />
-        <p>Diagnostic auto</p>
-      </div>
+  <h2 data-aos="fade-up">Nos Services</h2>
+  <div class="services-grid">
+    <div class="service-card" data-service="Réparation moteur" data-prices="Réparation moteur complet — 300€;Changement de pièces — 150€" data-aos="zoom-in">
+      <img src="{% static 'main/images/dvs.png' %}" />
+      <p>Réparation moteur</p>
     </div>
-  </section>
+    <div class="service-card" data-service="Réparation du châssis" data-prices="Réparation châssis — 400€;Remplacement pièces — 200€" data-aos="zoom-in" data-aos-delay="100">
+      <img src="{% static 'main/images/xod.png' %}" />
+      <p>Réparation du châssis</p>
+    </div>
+    <div class="service-card" data-service="Vidange d'huile" data-prices="Vidange standard — 50€;Vidange premium — 80€" data-aos="zoom-in" data-aos-delay="200">
+      <img src="{% static 'main/images/oil.png' %}" />
+      <p>Vidange d'huile</p>
+    </div>
+    <div class="service-card" data-service="Vente de voitures" data-prices="Contactez-nous pour les prix" data-aos="zoom-in" data-aos-delay="300">
+      <img src="{% static 'main/images/prod.png' %}" />
+      <p>Vente de voitures</p>
+    </div>
+    <div class="service-card" data-service="Réparation des freins" data-prices="Réparation frein avant — 120€;Réparation frein arrière — 130€" data-aos="zoom-in" data-aos-delay="400">
+      <img src="{% static 'main/images/torm.png' %}" />
+      <p>Réparation des freins</p>
+    </div>
+    <div class="service-card" data-service="Diagnostic auto" data-prices="Diagnostic complet — 90€;Diagnostic électrique — 50€" data-aos="zoom-in" data-aos-delay="500">
+      <img src="{% static 'main/images/diog.png' %}" />
+      <p>Diagnostic auto</p>
+    </div>
+  </div>
+</section>
+
 
   <!-- À PROPOS -->
   <section class="about-section-grid" id="about">

@@ -388,7 +388,6 @@ footer {
     grid-template-columns: 1fr;
   }
 }
-/* Стили модального окна */
 .modal {
   display: none;
   position: fixed;
@@ -411,6 +410,7 @@ footer {
   max-width: 500px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   font-family: inherit;
+  color: #333;
 }
 
 .close-btn {
@@ -425,4 +425,13 @@ footer {
 .close-btn:focus {
   color: black;
   text-decoration: none;
+}
+
+.modal-content ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.modal-content li {
+  margin-bottom: 8px;
 }
