@@ -13,7 +13,6 @@
 
 <body>
 <script src="{% static 'main/js/script.js' %}"></script>
-
 <header class="top-nav">
   <div class="logo-title">
     <img src="{% static 'main/images/logo.png' %}" alt="Logo" class="nav-logo" />
@@ -49,41 +48,29 @@
   <section class="services-section" id="services">
     <h2 data-aos="fade-up">Nos Services</h2>
     <div class="services-grid">
-      <div class="service-card" data-service="Réparation moteur" data-aos="zoom-in">
+      <div class="service-card" data-service="repair" data-aos="zoom-in">
         <img src="{% static 'main/images/dvs.png' %}" />
         <p>Réparation moteur</p>
       </div>
-      <div class="service-card" data-service="Réparation du châssis" data-aos="zoom-in" data-aos-delay="100">
+      <div class="service-card" data-service="repair" data-aos="zoom-in" data-aos-delay="100">
         <img src="{% static 'main/images/xod.png' %}" />
         <p>Réparation du châssis</p>
       </div>
-      <div class="service-card" data-service="Vidange d'huile" data-aos="zoom-in" data-aos-delay="200">
+      <div class="service-card" data-service="maintenance" data-aos="zoom-in" data-aos-delay="200">
         <img src="{% static 'main/images/oil.png' %}" />
         <p>Vidange d'huile</p>
       </div>
-      <div class="service-card" data-service="Vente de voitures" data-aos="zoom-in" data-aos-delay="300">
+      <div class="service-card" data-service="none" data-aos="zoom-in" data-aos-delay="300">
         <img src="{% static 'main/images/prod.png' %}" />
         <p>Vente de voitures</p>
       </div>
-      <div class="service-card" data-service="Réparation des freins" data-aos="zoom-in" data-aos-delay="400">
+      <div class="service-card" data-service="repair" data-aos="zoom-in" data-aos-delay="400">
         <img src="{% static 'main/images/torm.png' %}" />
         <p>Réparation des freins</p>
       </div>
-      <div class="service-card" data-service="Diagnostic auto" data-aos="zoom-in" data-aos-delay="500">
+      <div class="service-card" data-service="diagnostics" data-aos="zoom-in" data-aos-delay="500">
         <img src="{% static 'main/images/diog.png' %}" />
         <p>Diagnostic auto</p>
-      </div>
-    </div>
-
-    <!-- Модальное окно -->
-    <div id="modal" class="custom-modal hidden">
-      <div class="modal-overlay"></div>
-      <div class="custom-modal-content animate-fade-in">
-        <button class="modal-close" id="closeModal">&times;</button>
-        <h5 class="modal-title" id="modalTitle">Titre du service</h5>
-        <div id="modal-body" class="modal-table-container">
-          <p>Ici, vous pouvez ajouter une description ou un tableau des prix.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -150,7 +137,6 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
   AOS.init({ duration: 1000, once: true });
-
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
@@ -159,28 +145,6 @@
         target.scrollIntoView({ behavior: "smooth" });
       }
     });
-  });
-
-  // Модальное окно
-  const modal = document.getElementById("modal");
-  const modalTitle = document.getElementById("modalTitle");
-  const closeModalBtn = document.getElementById("closeModal");
-  const overlay = modal.querySelector(".modal-overlay");
-
-  document.querySelectorAll(".service-card").forEach(card => {
-    card.addEventListener("click", () => {
-      const title = card.getAttribute("data-service") || "Service";
-      modalTitle.textContent = title;
-      modal.classList.remove("hidden");
-    });
-  });
-
-  closeModalBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
-  });
-
-  overlay.addEventListener("click", () => {
-    modal.classList.add("hidden");
   });
 </script>
 
