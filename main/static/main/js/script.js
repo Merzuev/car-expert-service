@@ -2,11 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('modal');
   const modalTitle = document.getElementById('modalTitle');
   const modalBody = document.getElementById('modal-body');
-<<<<<<< HEAD
   const closeButton = document.querySelector('.modal-close');
-=======
-  const closeModalBtn = document.getElementById('closeModal');
->>>>>>> cc69404 (Fix structure and Procfile for Render deployment)
   const serviceCards = document.querySelectorAll('.service-card');
 
   const priceList = {
@@ -33,43 +29,26 @@ document.addEventListener('DOMContentLoaded', () => {
   function openModal(serviceKey, title = "Titre du service") {
     modalTitle.textContent = title;
     modalBody.innerHTML = priceList[serviceKey] || '<p>Прайс отсутствует</p>';
-    modal.style.display = 'block';
+    modal.classList.remove('hidden');
   }
 
   function closeModal() {
-    modal.style.display = 'none';
+    modal.classList.add('hidden');
   }
 
-  // Назначение обработчиков клика
   serviceCards.forEach(card => {
     card.addEventListener('click', () => {
-      const service = card.getAttribute('data-service');
-<<<<<<< HEAD
-      const content = priceList[service] || '<p>Прайс отсутствует</p>';
-      openModal(card.querySelector('p').textContent, content);
+      const serviceKey = card.getAttribute('data-service');
+      const title = card.querySelector('p')?.textContent || 'Service';
+      openModal(serviceKey, title);
     });
   });
 
-  // Обработчик клика на кнопку закрытия
-  closeButton.addEventListener('click', () => closeModal('modal'));
+  closeButton.addEventListener('click', closeModal);
 
-  // Закрытие модального окна при клике вне его содержимого
   window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      closeModal('modal');
-=======
-      const title = card.querySelector('p')?.textContent || "Service";
-      openModal(service, title);
-    });
-  });
-
-  closeModalBtn.addEventListener('click', closeModal);
-
-  // Закрытие при клике вне модального окна
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
+    if (event.target.classList.contains('modal-overlay')) {
       closeModal();
->>>>>>> cc69404 (Fix structure and Procfile for Render deployment)
     }
   });
 });
