@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('modal');
   const modalBody = document.getElementById('modal-body');
-  const closeButton = document.querySelector('.close-button');
+  const closeButton = document.querySelector('.modal-close');
   const serviceCards = document.querySelectorAll('.service-card');
 
   // Объект с прайсами для каждой услуги
@@ -44,17 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
     card.addEventListener('click', () => {
       const service = card.getAttribute('data-service');
       const content = priceList[service] || '<p>Прайс отсутствует</p>';
-      openModal(content);
+      openModal(card.querySelector('p').textContent, content);
     });
   });
 
   // Обработчик клика на кнопку закрытия
-  closeButton.addEventListener('click', closeModal);
+  closeButton.addEventListener('click', () => closeModal('modal'));
 
   // Закрытие модального окна при клике вне его содержимого
   window.addEventListener('click', (event) => {
     if (event.target === modal) {
-      closeModal();
+      closeModal('modal');
     }
   });
 });
