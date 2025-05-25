@@ -148,39 +148,51 @@
     });
   });
 </script>
- <!-- Модальное окно -->
-  <div id="priceModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h2 id="modal-title">Прайс-лист</h2>
-      <div id="modal-body">
-        <!-- Контент подставляется динамически -->
-      </div>
+<!-- Модальное окно -->
+<div id="priceModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h2 id="modal-title">Прайс-лист</h2>
+    <div id="modal-body">
+      <!-- Контент будет подставляться через JS -->
     </div>
   </div>
+</div>
 
   <!-- Скрипт модального окна -->
   <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('priceModal');
+    const closeBtn = modal.querySelector('.close-btn');
+    const modalTitle = modal.querySelector('#modal-title');
+    const modalBody = modal.querySelector('#modal-body');
+
     document.querySelectorAll('.service-card').forEach(card => {
       card.addEventListener('click', () => {
         const title = card.dataset.service;
-        const prices = card.dataset.prices.split(';').map(item => `<li>${item}</li>`).join('');
-        document.getElementById('modal-title').textContent = `Прайс: ${title}`;
-        document.getElementById('modal-body').innerHTML = `<ul>${prices}</ul>`;
-        document.getElementById('priceModal').style.display = 'block';
+        const prices = card.dataset.prices
+          .split(';')
+          .map(item => `<li>${item}</li>`)
+          .join('');
+
+        modalTitle.textContent = `Прайс: ${title}`;
+        modalBody.innerHTML = `<ul>${prices}</ul>`;
+        modal.classList.add('visible');
       });
     });
 
-    document.querySelector('.close-btn').onclick = () => {
-      document.getElementById('priceModal').style.display = 'none';
-    };
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('visible');
+    });
 
-    window.onclick = function(event) {
-      const modal = document.getElementById('priceModal');
-      if (event.target == modal) {
-        modal.style.display = 'none';
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('visible');
       }
-    };
-  </script>
+    });
+  });
+</script>
+
+
 </body>
 </html>
