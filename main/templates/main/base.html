@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
-
 </head>
 
 <body>
@@ -26,130 +25,6 @@
 </header>
 
 <main>
-
-  <!-- HERO -->
-  <section class="hero-section-custom" id="hero">
-    <div class="hero-container-custom">
-      <div class="hero-text-block" data-aos="fade-right">
-        <h2>Une approche <span class="accent">professionnelle</span> de la réparation automobile</h2>
-        <p><strong>Diagnostic :</strong> Inspection précise avec des équipements spécialisés.</p>
-        <p><strong>Réparation :</strong> Démontage, nettoyage, restauration complète sans intermédiaires.</p>
-        <p><strong>Détails :</strong> Pièces d’origine ou alternatives de qualité selon le budget.</p>
-        <p><strong>Service :</strong> Suivi transparent du client à chaque étape.</p>
-        <p><strong>Vente de véhicules :</strong> Véhicules d’occasion en excellent état.</p>
-      </div>
-      <div class="hero-image-block" data-aos="fade-left">
-        <img src="{% static 'main/images/logo.png' %}" alt="Diagnostic" />
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="services-section" id="services">
-  <h2 data-aos="fade-up">Nos Services</h2>
-  <div class="services-grid">
-  
-    <div class="service-card"
-         data-service="Ремонт двигателя"
-         data-prices="Диагностика — 500₽;Ремонт блока — 3000₽"
-         data-aos="zoom-in" data-aos-delay="0">
-      <img src="{% static 'main/images/dvs.png' %}" alt="Ремонт двигателя">
-      <p>Ремонт двигателя</p>
-    </div>
-
-    <div class="service-card"
-         data-service="Réparation du châssis"
-         data-prices="Réparation châssis — 400€;Remplacement pièces — 200€"
-         data-aos="zoom-in" data-aos-delay="100">
-      <img src="{% static 'main/images/xod.png' %}" alt="Réparation du châssis">
-      <p>Réparation du châssis</p>
-    </div>
-
-    <div class="service-card"
-         data-service="Vidange d'huile"
-         data-prices="Vidange standard — 50€;Vidange premium — 80€"
-         data-aos="zoom-in" data-aos-delay="200">
-      <img src="{% static 'main/images/oil.png' %}" alt="Vidange d'huile">
-      <p>Vidange d'huile</p>
-    </div>
-
-    <div class="service-card"
-         data-service="Vente de voitures"
-         data-prices="Contactez-nous pour les prix"
-         data-aos="zoom-in" data-aos-delay="300">
-      <img src="{% static 'main/images/prod.png' %}" alt="Vente de voitures">
-      <p>Vente de voitures</p>
-    </div>
-
-    <div class="service-card"
-         data-service="Réparation des freins"
-         data-prices="Réparation frein avant — 120€;Réparation frein arrière — 130€"
-         data-aos="zoom-in" data-aos-delay="400">
-      <img src="{% static 'main/images/torm.png' %}" alt="Réparation des freins">
-      <p>Réparation des freins</p>
-    </div>
-
-    <div class="service-card"
-         data-service="Diagnostic auto"
-         data-prices="Diagnostic complet — 90€;Diagnostic électrique — 50€"
-         data-aos="zoom-in" data-aos-delay="500">
-      <img src="{% static 'main/images/diog.png' %}" alt="Diagnostic auto">
-      <p>Diagnostic auto</p>
-    </div>
-
-  </div>
-</section>
-
-
-
-  <!-- À PROPOS -->
-  <section class="about-section-grid" id="about">
-    <h2>À propos</h2>
-    <div class="about-grid">
-      <div class="about-card">
-        <h3>🛠️ Équipe expérimentée</h3>
-        <p>Notre équipe est composée de spécialistes hautement qualifiés avec des années d’expérience.</p>
-      </div>
-      <div class="about-card">
-        <h3>⚖️ Transparence</h3>
-        <p>Diagnostic honnête et tarification claire sans frais cachés.</p>
-      </div>
-      <div class="about-card">
-        <h3 class="about-stars-title">
-          <span class="about-stars">★★★★★</span><br>
-          Clients satisfaits
-        </h3>
-        <p>Nous sommes appréciés pour notre service client personnalisé et notre fiabilité.</p>
-      </div>
-      <div class="about-card">
-        <h3>🛡️ Garantie</h3>
-        <p>Garantie sur toutes les réparations et pièces installées.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACTS -->
-  <section class="contact-section" id="contacts">
-    <h2 data-aos="fade-up">Contacts</h2>
-    <div class="contact-boxes" data-aos="fade-up">
-      <div class="contact-item">
-        <h3>Téléphone</h3>
-        <a href="tel:+33759617612">+33 7 59 61 76 12</a>
-      </div>
-      <div class="contact-item">
-        <h3>Email</h3>
-        <a href="mailto:cars.expert.service@gmail.com">cars.expert.service@gmail.com</a>
-      </div>
-      <div class="contact-item">
-        <h3>Adresse</h3>
-        <a href="https://www.google.com/maps?q=590+Rue+de+Donnery,+45430+Mardié" target="_blank">
-          590 Rue de Donnery, 45430 Mardié
-        </a>
-      </div>
-    </div>
-    <iframe class="map" data-aos="fade-up" src="https://www.google.com/maps?q=47.893334401027516,2.0605791863156537&hl=fr&z=14&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  </section>
-
   {% block content %}{% endblock %}
 </main>
 
@@ -174,7 +49,7 @@
     });
   });
 </script>
-<!-- МОДАЛЬНОЕ ОКНО -->
+
 <div id="priceModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
@@ -183,36 +58,6 @@
   </div>
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const modal = document.getElementById("priceModal");
-    const modalContent = modal.querySelector(".modal-content");
-    const closeModal = modal.querySelector(".close");
-
-    document.querySelectorAll(".service-card").forEach(card => {
-      card.addEventListener("click", () => {
-        const title = card.getAttribute("data-service");
-        const prices = card.getAttribute("data-prices");
-
-        modalContent.querySelector("h3").textContent = `Прайс: ${title}`;
-        const priceList = prices.split(";").map(item => `<li>${item}</li>`).join("");
-        modalContent.querySelector("ul").innerHTML = priceList;
-
-        modal.classList.add("visible");
-      });
-    });
-
-    closeModal.addEventListener("click", () => {
-      modal.classList.remove("visible");
-    });
-
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.remove("visible");
-      }
-    });
-  });
-</script>
-
+<script src="{% static 'main/js/script.js' %}"></script>
 </body>
 </html>
