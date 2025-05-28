@@ -59,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <thead>
             <tr>
               <th>${serviceData.sheetName}</th>
-              <th>Цена от</th>
-              <th>Цена до</th>
+              <th>Prix à partir de</th>
+              <th>Prix jusqu'à</th>
             </tr>
           </thead>
           <tbody>
