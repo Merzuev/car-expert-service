@@ -21,26 +21,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
   serviceCards.forEach(card => {
     card.addEventListener('click', () => {
-      const title = card.getAttribute('data-service');
-      const prices = card.getAttribute('data-prices');
+      const serviceName = card.getAttribute('data-service');
       
-      if (!title || !prices) {
-        console.error('Missing data attributes on service card');
+      if (!serviceName) {
+        console.error('Missing data-service attribute on service card');
         return;
       }
 
       const titleElement = modalContent.querySelector('h3');
-      const listElement = modalContent.querySelector('ul');
+      const contentElement = modalContent.querySelector('.table-container');
       
-      if (!titleElement || !listElement) {
+      if (!titleElement || !contentElement) {
         console.error('Modal content elements not found');
         return;
       }
 
-      titleElement.textContent = `Прайс: ${title}`;
-      const priceList = prices.split(';').map(item => `<li>${item}</li>`).join('');
-      listElement.innerHTML = priceList;
+      titleElement.textContent = `Прайс: ${serviceName}`;
       
+      // Для "Vente de voitures" показываем простое сообщение
+      if (serviceName === "Vente de voitures") {
+        contentElement.innerHTML = '<p>Contactez-nous pour les prix des voitures disponibles</p>';
+        modal.classList.add('visible');
+        return;
+      }
+
+      // Получаем данные для выбранной услуги
+      const serviceData = priceData[serviceName];
+      if (!serviceData) {
+        contentElement.innerHTML = '<p>Информация о ценах временно недоступна</p>';
+        modal.classList.add('visible');
+        return;
+      }
+
+      // Создаем HTML для таблицы
+      let tableHTML = `
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>${serviceData.sheetName}</th>
+              <th>Цена от</th>
+              <th>Цена до</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      // Добавляем строки данных
+      serviceData.data.forEach(row => {
+        tableHTML += `
+          <tr>
+            <td>${row[0] || ''}</td>
+            <td>${row[1] || ''}</td>
+            <td>${row[2] || ''}</td>
+          </tr>
+        `;
+      });
+
+      tableHTML += `
+          </tbody>
+        </table>
+      `;
+
+      // Вставляем таблицу в контейнер
+      contentElement.innerHTML = tableHTML;
       modal.classList.add('visible');
     });
   });
@@ -63,4 +106,49 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.classList.remove('visible');
     }
   });
-}); 
+});
+
+serviceCards.forEach(card => {
+  card.addEventListener('click', () => {
+    const serviceName = card.dataset.service;
+    const serviceData = priceData[serviceName];
+
+    if (!serviceData || !serviceData.data) {
+      console.error('Данные не найдены для услуги:', serviceName);
+      return;
+    }
+
+    const tableContainer = modal.querySelector('.table-container');
+    tableContainer.innerHTML = ''; // Очистить предыдущее содержимое
+
+    const table = document.createElement('table');
+    table.classList.add('price-table');
+
+    serviceData.data.forEach(row => {
+      const tr = document.createElement('tr');
+      row.forEach(cell => {
+        const td = document.createElement('td');
+        td.textContent = cell;
+        tr.appendChild(td);
+      });
+      table.appendChild(tr);
+    });
+
+    tableContainer.appendChild(table);
+
+    const modalTitle = modal.querySelector('.modal-title');
+    modalTitle.textContent = serviceName;
+
+    modal.style.display = 'block';
+  });
+});
+
+closeModal.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});

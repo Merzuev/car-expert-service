@@ -53,11 +53,12 @@
 <div id="priceModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <h3>Прайс</h3>
-    <ul></ul>
+    <h3 class="modal-title">Прайс</h3>  <!-- Добавили класс для надежности -->
+    <div class="table-container"></div>  <!-- Контейнер для таблицы -->
   </div>
 </div>
 
+<script src="{% static 'main/js/prices.js' %}"></script>
 <script src="{% static 'main/js/script.js' %}"></script>
 </body>
 </html>
