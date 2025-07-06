@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # --- Security ---
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-secret-key-for-dev')
 
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']  # Restrict this in production!
 
 # --- Installed apps ---
@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'smart_selects',
 ]
 
 # --- Middleware ---

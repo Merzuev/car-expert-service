@@ -1,154 +1,167 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('priceModal');
-  if (!modal) {
-    console.error('Modal element not found');
-    return;
-  }
+  /* ===== ПРАЙС-МОДАЛЬ ===== */
+  const priceModal = document.getElementById('priceModal');
+  if (priceModal) {
+    const closeModal = priceModal.querySelector('.close');
+    const priceTables = priceModal.querySelectorAll('.price-table-container');
+    const serviceCards = document.querySelectorAll('.service-card');
 
-  const modalContent = modal.querySelector('.modal-content');
-  const closeModal = modal.querySelector('.close');
-  if (!modalContent || !closeModal) {
-    console.error('Modal content or close button not found');
-    return;
-  }
-
-  // Добавляем обработчики для всех карточек услуг
-  const serviceCards = document.querySelectorAll('.service-card');
-  if (serviceCards.length === 0) {
-    console.error('No service cards found');
-    return;
-  }
-
-  serviceCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const serviceName = card.getAttribute('data-service');
-      
-      if (!serviceName) {
-        console.error('Missing data-service attribute on service card');
-        return;
-      }
-
-      const titleElement = modalContent.querySelector('h3');
-      const contentElement = modalContent.querySelector('.table-container');
-      
-      if (!titleElement || !contentElement) {
-        console.error('Modal content elements not found');
-        return;
-      }
-
-      titleElement.textContent = `Прайс: ${serviceName}`;
-      
-      // Для "Vente de voitures" показываем простое сообщение
-      if (serviceName === "Vente de voitures") {
-        contentElement.innerHTML = '<p>Contactez-nous pour les prix des voitures disponibles</p>';
-        modal.classList.add('visible');
-        return;
-      }
-
-      // Получаем данные для выбранной услуги
-      const serviceData = priceData[serviceName];
-      if (!serviceData) {
-        contentElement.innerHTML = '<p>Информация о ценах временно недоступна</p>';
-        modal.classList.add('visible');
-        return;
-      }
-
-      // Создаем HTML для таблицы
-      let tableHTML = `
-        <table class="price-table">
-          <thead>
-            <tr>
-              <th>${serviceData.sheetName}</th>
-              <th>Prix à partir de</th>
-              <th>Prix jusqu'à</th>
-            </tr>
-          </thead>
-          <tbody>
-      `;
-
-      // Добавляем строки данных
-      serviceData.data.forEach(row => {
-        tableHTML += `
-          <tr>
-            <td>${row[0] || ''}</td>
-            <td>${row[1] || ''}</td>
-            <td>${row[2] || ''}</td>
-          </tr>
-        `;
+    serviceCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const id = card.getAttribute('data-service');
+        priceTables.forEach(pt => pt.style.display = 'none');
+        const tbl = priceModal.querySelector(`#service-table-${id}`);
+        if (tbl) {
+          tbl.style.display = 'block';
+          priceModal.classList.add('visible');
+        }
       });
-
-      tableHTML += `
-          </tbody>
-        </table>
-      `;
-
-      // Вставляем таблицу в контейнер
-      contentElement.innerHTML = tableHTML;
-      modal.classList.add('visible');
-    });
-  });
-
-  // Закрытие модального окна по клику на крестик
-  closeModal.addEventListener('click', () => {
-    modal.classList.remove('visible');
-  });
-
-  // Закрытие модального окна по клику вне его области
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('visible');
-    }
-  });
-
-  // Закрытие модального окна по нажатию Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('visible')) {
-      modal.classList.remove('visible');
-    }
-  });
-});
-
-serviceCards.forEach(card => {
-  card.addEventListener('click', () => {
-    const serviceName = card.dataset.service;
-    const serviceData = priceData[serviceName];
-
-    if (!serviceData || !serviceData.data) {
-      console.error('Данные не найдены для услуги:', serviceName);
-      return;
-    }
-
-    const tableContainer = modal.querySelector('.table-container');
-    tableContainer.innerHTML = ''; // Очистить предыдущее содержимое
-
-    const table = document.createElement('table');
-    table.classList.add('price-table');
-
-    serviceData.data.forEach(row => {
-      const tr = document.createElement('tr');
-      row.forEach(cell => {
-        const td = document.createElement('td');
-        td.textContent = cell;
-        tr.appendChild(td);
-      });
-      table.appendChild(tr);
     });
 
-    tableContainer.appendChild(table);
+    const closePriceModal = () => {
+      priceModal.classList.remove('visible');
+      priceTables.forEach(pt => pt.style.display = 'none');
+    };
 
-    const modalTitle = modal.querySelector('.modal-title');
-    modalTitle.textContent = serviceName;
+    closeModal.addEventListener('click', closePriceModal);
+    priceModal.addEventListener('click', e => { if (e.target === priceModal) closePriceModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && priceModal.classList.contains('visible')) closePriceModal(); });
+  }
 
-    modal.style.display = 'block';
-  });
-});
+  /* ===== КАРУСЕЛЬ АВТО (2 карточки + слайдер фото + лайтбокс) ===== */
+  const container = document.querySelector('.cars-carousel');
+  if (container) {
+    const carsWrapper = container.querySelector('.cars-wrapper');
+    const carCards = container.querySelectorAll('.car-card');
+    let currentCarIndex = 0;
 
-closeModal.addEventListener('click', () => {
-  modal.style.display = 'none';
-});
+    // Получаем ширину карточки с учётом gap между ними
+    function getCardWidth() {
+      if (carCards.length === 0) return 0;
+      const style = getComputedStyle(carCards[0]);
+      const width = carCards[0].offsetWidth;
+      const gap = parseInt(style.marginRight) || 0; // Если есть margin-right
+      return width + gap;
+    }
 
-window.addEventListener('click', (event) => {
-  if (event.target === modal) {
-    modal.style.display = 'none';
+    // Показывать 2 машины одновременно, двигаем wrapper
+    function showCars(index) {
+      const cardWidth = getCardWidth();
+      const maxIndex = carCards.length - 2; // максимум сдвига для 2 карточек
+
+      if (index < 0) index = 0;
+      if (index > maxIndex) index = maxIndex;
+
+      currentCarIndex = index;
+      const shift = cardWidth * index;
+      carsWrapper.style.transform = `translateX(-${shift}px)`;
+    }
+
+    // --- Слайдер фото внутри карточки ---
+    carCards.forEach(card => {
+      const images = card.querySelectorAll('.car-slide');
+      const dotsContainer = card.querySelector('.dots-container');
+      let currentImgIndex = 0;
+
+      function showImage(idx) {
+        images.forEach((img, i) => {
+          img.classList.toggle('active', i === idx);
+          dotsContainer.children[i].classList.toggle('active', i === idx);
+        });
+      }
+
+      // Создаём точки-индикаторы
+      images.forEach(() => {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        dotsContainer.appendChild(dot);
+      });
+
+      // Навигация по точкам
+      Array.from(dotsContainer.children).forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          currentImgIndex = i;
+          showImage(currentImgIndex);
+        });
+      });
+
+      // Клик по фото открывает лайтбокс
+      images.forEach((img, i) => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => openLightbox(images, i));
+      });
+
+      showImage(0);
+    });
+
+    // --- Кнопки перелистывания авто ---
+    container.querySelector('.carousel-prev').addEventListener('click', () => {
+      showCars(currentCarIndex - 1);
+    });
+
+    container.querySelector('.carousel-next').addEventListener('click', () => {
+      showCars(currentCarIndex + 1);
+    });
+
+    showCars(currentCarIndex);
+
+    // --- ЛАЙТБОКС ---
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+    const lightboxClose = lightbox.querySelector('.lightbox-close');
+    const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+    const lightboxNext = lightbox.querySelector('.lightbox-next');
+
+    let currentLightboxImages = [];
+    let currentLightboxIndex = 0;
+
+    function openLightbox(images, startIdx) {
+      currentLightboxImages = Array.from(images).map(img => img.src);
+      currentLightboxIndex = startIdx;
+      updateLightboxImage();
+      lightbox.style.display = 'flex';
+    }
+
+    function updateLightboxImage() {
+      lightboxImg.src = currentLightboxImages[currentLightboxIndex];
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      currentLightboxImages = [];
+      currentLightboxIndex = 0;
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+
+    lightboxPrev.addEventListener('click', () => {
+      currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+      updateLightboxImage();
+    });
+
+    lightboxNext.addEventListener('click', () => {
+      currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+      updateLightboxImage();
+    });
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+        closeLightbox();
+      }
+      if (e.key === 'ArrowLeft' && lightbox.style.display === 'flex') {
+        currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+        updateLightboxImage();
+      }
+      if (e.key === 'ArrowRight' && lightbox.style.display === 'flex') {
+        currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+        updateLightboxImage();
+      }
+    });
   }
 });

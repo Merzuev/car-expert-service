@@ -1,0 +1,6 @@
+{
+    "BMW": ["3 Series", "5 Series", "X5", "X3"],
+    "Audi": ["A4", "Q7", "A6"],
+    "Toyota": ["Camry", "Corolla", "RAV4"],
+    "Mercedes-Benz": ["E-Class", "C-Class", "GLC"]
+}

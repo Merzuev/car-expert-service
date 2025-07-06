@@ -26,3 +26,7 @@ Thumbs.db
 # Миграции (опционально)
 **/migrations/*.pyc
 **/migrations/__pycache__/
+staticfiles/
+*.pyc
+*.pyo
+*.db

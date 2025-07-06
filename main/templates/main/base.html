@@ -14,11 +14,12 @@
 <body>
 <header class="top-nav">
   <div class="logo-title">
-    <img src="{% static 'main/images/logo.png' %}" alt="Logo" class="nav-logo" />
+    <img src="{% static 'main/images/logo.png' %}" alt="Logo" class="nav-logo"/>
     <span>CAREXPERT SERVICES</span>
   </div>
   <ul class="nav-menu">
     <li><a href="#services">Services</a></li>
+    <li><a href="#cars">Voitures</a></li>
     <li><a href="#about">À propos</a></li>
     <li><a href="#contacts">Contacts</a></li>
   </ul>
@@ -28,14 +29,21 @@
   {% block content %}{% endblock %}
 </main>
 
-<!-- Pied de page -->
 <footer>
   <div class="footer-container">
-    <p>&copy; {{ current_year }} CAR EXPERT SERVICE$. Tous droits réservés.</p>
+    <p>&copy; {{ current_year }} CAR EXPERT SERVICES. Tous droits réservés.</p>
   </div>
 </footer>
 
-<!-- JS -->
+<!-- Modal prix -->
+<div id="priceModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3 class="modal-title">Прайс</h3>
+    <div class="table-container"></div>
+  </div>
+</div>
+
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
   AOS.init({ duration: 1000, once: true });
@@ -49,15 +57,6 @@
     });
   });
 </script>
-
-<div id="priceModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h3 class="modal-title">Прайс</h3>  <!-- Добавили класс для надежности -->
-    <div class="table-container"></div>  <!-- Контейнер для таблицы -->
-  </div>
-</div>
-
 <script src="{% static 'main/js/prices.js' %}"></script>
 <script src="{% static 'main/js/script.js' %}"></script>
 </body>

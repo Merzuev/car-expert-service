@@ -1,0 +1,42 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const brandField = document.getElementById("id_brand");
+            const modelField = document.getElementById("id_model");
+            const MODEL_CHOICES_MAP = {{ MODEL_CHOICES_MAP|safe }};
+            // Функция для обновления списка моделей
+            function updateModels() {
+                let brand = brandField.value;
+                let models = MODEL_CHOICES_MAP[brand] || [];
+                modelField.innerHTML = "";
+                // Если моделей нет — делаем поле пустым
+                if (!models.length) {
+                    let option = document.createElement('option');
+                    option.value = '';
+                    option.text = 'Выберите модель';
+                    modelField.appendChild(option);
+                }
+                // Заполняем
+                models.forEach(function(pair) {
+                    let option = document.createElement('option');
+                    option.value = pair[0];
+                    option.text = pair[1];
+                    modelField.appendChild(option);
+                });
+                // Автовыбор если совпадает с текущим значением
+                if (modelField.dataset.current && modelField.dataset.current !== '') {
+                    modelField.value = modelField.dataset.current;
+                }
+            }
+            if (brandField && modelField) {
+                // Текущее значение для редактирования
+                modelField.dataset.current = modelField.value;
+                brandField.addEventListener("change", updateModels);
+                updateModels();
+            }
+        });
+    </script>
+{% endblock %}

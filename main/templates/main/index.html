@@ -1,6 +1,7 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block content %}
+
 <!-- HERO -->
 <section class="hero-section-custom" id="hero">
   <div class="hero-container-custom">
@@ -17,36 +18,110 @@
     </div>
   </div>
 </section>
+
 <!-- SERVICES -->
 <section class="services-section" id="services">
-  <h2 data-aos="fade-up">Nos Services</h2>
+  <h2 data-aos="fade-up">Nos services</h2>
   <div class="services-grid">
-    <div class="service-card" data-service="Réparation moteur" data-prices="Диагностика — 500₽;Ремонт блока — 3000₽" data-aos="zoom-in" data-aos-delay="0">
-      <img src="{% static 'main/images/dvs.png' %}" alt="Réparation moteur">
-      <p>Réparation moteur</p>
-    </div>
-    <div class="service-card" data-service="Réparation du châssis" data-prices="Réparation châssis — 400€;Remplacement pièces — 200€" data-aos="zoom-in" data-aos-delay="100">
-      <img src="{% static 'main/images/xod.png' %}" alt="Réparation du châssis">
-      <p>Réparation du châssis</p>
-    </div>
-    <div class="service-card" data-service="Vidange d'huile" data-prices="Vidange standard — 50€;Vidange premium — 80€" data-aos="zoom-in" data-aos-delay="200">
-      <img src="{% static 'main/images/oil.png' %}" alt="Vidange d'huile">
-      <p>Vidange d'huile</p>
-    </div>
-    <div class="service-card" data-service="Vente de voitures" data-prices="Contactez-nous pour les prix" data-aos="zoom-in" data-aos-delay="300">
-      <img src="{% static 'main/images/prod.png' %}" alt="Vente de voitures">
-      <p>Vente de voitures</p>
-    </div>
-    <div class="service-card" data-service="Réparation des freins" data-prices="Réparation frein avant — 120€;Réparation frein arrière — 130€" data-aos="zoom-in" data-aos-delay="400">
-      <img src="{% static 'main/images/torm.png' %}" alt="Réparation des freins">
-      <p>Réparation des freins</p>
-    </div>
-    <div class="service-card" data-service="Diagnostic auto" data-prices="Diagnostic complet — 90€;Diagnostic électrique — 50€" data-aos="zoom-in" data-aos-delay="500">
-      <img src="{% static 'main/images/diog.png' %}" alt="Diagnostic auto">
-      <p>Diagnostic auto</p>
+    {% for service in services %}
+      <div class="service-card" data-service="{{ service.id }}"
+           data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:'0'|add:'00' }}">
+        {% if service.image %}
+          <img src="{{ service.image.url }}" alt="{{ service.name }}">
+        {% else %}
+          <img src="{% static 'main/images/default.png' %}" alt="{{ service.name }}">
+        {% endif %}
+        <p>{{ service.name }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- MODAL PRICES -->
+<div id="priceModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    {% for service in services %}
+      <div class="price-table-container" id="service-table-{{ service.id }}" style="display: none;">
+        <h3>{{ service.name }}</h3>
+        {% if service.prices.exists %}
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Prix à partir de</th>
+                <th>Prix jusqu'à</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for price in service.prices.all %}
+                <tr>
+                  <td>{{ price.option }}</td>
+                  <td>{% if price.price_from %}{{ price.price_from }} €{% else %}-{% endif %}</td>
+                  <td>{% if price.price_to %}{{ price.price_to }} €{% else %}-{% endif %}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p>Le prix sera disponible prochainement.</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+<!-- CARS FOR SALE -->
+<section class="cars-section" id="cars">
+  <h2 data-aos="fade-up" class="section-title">Voitures à vendre</h2>
+  <div class="cars-carousel" data-aos="fade-left">
+    <button class="carousel-prev" aria-label="Previous cars">&lt;</button>
+    <button class="carousel-next" aria-label="Next cars">&gt;</button>
+
+    <div class="cars-wrapper">
+      {% for car in cars %}
+        <div class="car-card" data-index="{{ forloop.counter0 }}">
+          <div class="car-images">
+            {% with car.images.all as imgs %}
+              {% for img in imgs %}
+                <img src="{{ img.image.url }}" alt="Photo additionnelle" class="car-slide">
+              {% endfor %}
+              <img src="{{ car.main_image.url }}" alt="{{ car.brand.name }} {{ car.model.name }}" class="car-slide active">
+            {% endwith %}
+            <div class="dots-container"></div>
+          </div>
+          <div class="car-info">
+            <h3>{{ car.brand.name }} {{ car.model.name }} ({{ car.year }})</h3>
+            <ul>
+              <li><strong>Kilométrage:</strong> {{ car.mileage }} km</li>
+              <li><strong>Moteur:</strong> {{ car.engine_type }} {{ car.engine_capacity }} L</li>
+              <li><strong>Boîte:</strong> {{ car.gearbox }}</li>
+              <li><strong>Transmission:</strong> {{ car.drive }}</li>
+              <li><strong>Couleur:</strong> {{ car.color }}</li>
+              <li><strong>Prix:</strong> {{ car.price }} €</li>
+            </ul>
+          </div>
+        </div>
+      {% empty %}
+        <p>Aucune voiture à vendre pour l'instant.</p>
+      {% endfor %}
     </div>
   </div>
 </section>
+
+
+<!-- Lightbox для полноэкранного просмотра -->
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-img" src="" alt="">
+  <button class="lightbox-prev" aria-label="Previous image">&#10094;</button>
+  <button class="lightbox-next" aria-label="Next image">&#10095;</button>
+</div>
+
+
+
 <!-- À PROPOS -->
 <section class="about-section-grid" id="about">
   <h2>À propos</h2>
@@ -72,6 +147,7 @@
     </div>
   </div>
 </section>
+
 <!-- CONTACTS -->
 <section class="contact-section" id="contacts">
   <h2 data-aos="fade-up">Contacts</h2>
@@ -93,4 +169,5 @@
   </div>
   <iframe class="map" data-aos="fade-up" src="https://www.google.com/maps?q=47.893334401027516,2.0605791863156537&hl=fr&z=14&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </section>
+
 {% endblock %}
