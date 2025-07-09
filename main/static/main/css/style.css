@@ -604,57 +604,34 @@ footer {
   color: var(--brand-text);
 }
 
-/* Навигационные кнопки */
-.carousel-prev,
-.carousel-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px; height: 48px;
-  background-color: rgba(0,163,223,0.60);
-  border-radius: 50%;
-  color: var(--brand-primary);
-  font-size: 28px;
-  line-height: 48px;
-  text-align: center;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  box-shadow: 0 0 12px rgba(0,163,223,0.27);
-  z-index: 20;
-}
-
-.carousel-prev { left: 20px; }
-.carousel-next { right: 20px; }
-
-.carousel-prev:hover,
-.carousel-next:hover {
-  background-color: var(--brand-primary);
-  color: var(--brand-surface);
-  box-shadow: 0 0 20px rgba(0,163,223,0.4);
-}
-
 /* =======================================
-   Lightbox
+   Lightbox (всплывающий просмотр фото)
    ======================================= */
 .lightbox {
   display: none;
   position: fixed;
   z-index: 2000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,163,223,0.16);
-  align-items: center; justify-content: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* тёмный фон */
+  align-items: center;
+  justify-content: center;
+  overflow: auto; /* обеспечивает прокрутку самого картинного блока, если изображение большое */
 }
 
 .lightbox-img {
-  max-width: 90%; max-height: 80vh;
+  max-width: 90%;
+  max-height: 80vh;
   border-radius: 12px;
-  box-shadow: 0 0 30px rgba(0,163,223,0.2);
+  box-shadow: 0 0 30px rgba(0, 163, 223, 0.2);
 }
 
 .lightbox-close {
-  position: absolute; top: 20px; right: 30px;
+  position: absolute;
+  top: 20px;
+  right: 30px;
   font-size: 40px;
   color: var(--brand-primary);
   cursor: pointer;
@@ -668,23 +645,67 @@ footer {
 
 .lightbox-prev,
 .lightbox-next {
-  position: absolute;
-  top: 50%; transform: translateY(-50%);
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 48px;
   color: var(--brand-primary);
-  background: rgba(0,163,223,0.28);
+  background: rgba(0, 163, 223, 0.28);
   border: none;
   cursor: pointer;
-  padding: 10px 20px;
-  border-radius: 12px;
+  padding: 10px;
+  border-radius: 50%;
   user-select: none;
   transition: background-color 0.3s ease;
+  z-index: 2001;
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+
+.lightbox-next {
+  right: 20px;
 }
 
 .lightbox-prev:hover,
 .lightbox-next:hover {
   background-color: var(--brand-secondary);
 }
+
+/* =======================================
+   Carousel buttons (справа/слева от карусели машин)
+   ======================================= */
+.carousel-prev,
+.carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 32px;
+  color: var(--brand-primary);
+  background: rgba(0, 163, 223, 0.28);
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  z-index: 101;
+}
+
+.carousel-prev {
+  left: 10px;
+}
+
+.carousel-next {
+  right: 10px;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+  background-color: var(--brand-secondary);
+}
+
 
 /* ======= АДАПТИВНОСТЬ ДЛЯ КАРУСЕЛИ АВТО ========== */
 
