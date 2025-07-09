@@ -71,8 +71,6 @@
   </div>
 </div>
 
-
-
 <!-- CARS FOR SALE -->
 <section class="cars-section" id="cars">
   <h2 data-aos="fade-up" class="section-title">Voitures à vendre</h2>
@@ -88,12 +86,12 @@
               {% for img in imgs %}
                 <img src="{{ img.image.url }}" alt="Photo additionnelle" class="car-slide">
               {% endfor %}
-              <img src="{{ car.main_image.url }}" alt="{{ car.brand.name }} {{ car.model.name }}" class="car-slide active">
+              <img src="{{ car.main_image.url }}" alt="{{ car.brand }} {{ car.model }}" class="car-slide active">
             {% endwith %}
             <div class="dots-container"></div>
           </div>
           <div class="car-info">
-            <h3>{{ car.brand.name }} {{ car.model.name }} ({{ car.year }})</h3>
+            <h3>{{ car.brand }}: {{ car.model }} ({{ car.year }})</h3>
             <ul>
               <li><strong>Kilométrage:</strong> {{ car.mileage }} km</li>
               <li><strong>Moteur:</strong> {{ car.engine_type }} {{ car.engine_capacity }} L</li>
@@ -111,7 +109,6 @@
   </div>
 </section>
 
-
 <!-- Lightbox для полноэкранного просмотра -->
 <div id="lightbox" class="lightbox">
   <span class="lightbox-close">&times;</span>
@@ -119,8 +116,6 @@
   <button class="lightbox-prev" aria-label="Previous image">&#10094;</button>
   <button class="lightbox-next" aria-label="Next image">&#10095;</button>
 </div>
-
-
 
 <!-- À PROPOS -->
 <section class="about-section-grid" id="about">
