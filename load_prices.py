@@ -1,5 +1,12 @@
+import os
+import django
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "darksite.settings")
+django.setup()
+
 from main.models import Service, Price
 import re
+
 
 data = {
     "Réparation moteur": [
